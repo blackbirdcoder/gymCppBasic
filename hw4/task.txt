@@ -1,0 +1,9 @@
+The program can display several lines of code 
+on the screen in the following format:
+
+```
+8 bit unsigned integer maximum is <number>;
+16 bit unsigned integer maximum is <number>;
+32 bit unsigned integer maximum is <number>;
+64 bit unsigned integer maximum is <number>.
+```

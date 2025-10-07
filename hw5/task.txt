@@ -1,0 +1,11 @@
+For each of the numbers 1 to 20, print 4 lines like this:
+
+
+Number is [the number itself];
+
+2^number is [2 to the power of number];
+
+Number is [odd/even]; [must be one of two: for example, if the number is 20, then even, if the number is 19, then odd];
+[your number] is [a lucky number/not a lucky number]. 
+
+[numbers from 1 to 13 are lucky, from 14 onwards - not lucky].

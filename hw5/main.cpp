@@ -1,23 +1,21 @@
 #include <cmath>
 #include <iostream>
 
-namespace constant {
 const int LIMIT = 20;
 const int BASE = 2;
 const int BIAS = 13;
 const int DIV = 2;
-}; // namespace constant
-
-using namespace std;
-using namespace constant;
 
 int main(void) {
   for (int i = 1; i <= LIMIT; ++i) {
-    cout << "Number is " << i << endl;
-    cout << "2^number is " << pow(BASE, i) << endl;
-    cout << "Number is " << i << " " << (i % DIV == 0 ? "even" : "odd") << endl;
-    cout << i << " " << (i < BIAS ? "a lucky number" : "a not lucky number")
-         << endl;
+    std::cout << "Number is " << i << std::endl;
+    std::cout << "2^number is " << int(pow(BASE, i)) << std::endl;
+    std::cout << "Number is " << i << " " << (i % DIV == 0 ? "even" : "odd")
+              << std::endl;
+    std::cout << i << " "
+              << (i <= BIAS ? "a lucky number" : "a not lucky number")
+              << std::endl;
+    std::cout << std::endl;
   }
   return 0;
 }

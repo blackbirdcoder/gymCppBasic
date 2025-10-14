@@ -1,106 +1,103 @@
 #include <iostream>
 #include <string>
 
-void notification(std::string, long long, long long &);
-void notification(std::string, long long, long long *);
-void notification(std::string, int, int *);
+void notification(std::string, long long *);
+void notification(std::string, int *);
+
 void setToOne(int);
 void setToOneRef(int &);
 void setToOne(int *);
-long long product(int, int, long long *);
-void productNude(int, int, long long *);
-void productNudeRef(int, int, long long &);
+
+long long product(int, int);
+void productPtr(int, int, long long *);
+void productRef(int, int, long long &);
 
 int main(void) {
-  std::cout << "---- 1\n";
-  int target = 0;
-  notification("after", target, &target);
-  setToOne(target);
-  notification("before", target, &target);
+  std::cout << "---- 1 ---- (Value)\n";
+  int targetOne = 0;
+  notification("before", &targetOne);
+  setToOne(targetOne);
+  notification("after", &targetOne);
 
-  std::cout << "---- 2\n";
-  notification("after", target, &target);
-  setToOneRef(target);
-  notification("before", target, &target);
+  std::cout << "---- 2 ---- (Link)\n";
+  int targetTwo = 0;
+  notification("before", &targetTwo);
+  setToOneRef(targetTwo);
+  notification("after", &targetTwo);
 
-  std::cout << "---- 3\n";
-  notification("after", target, &target);
-  setToOne(&target);
-  notification("before", target, &target);
+  std::cout << "---- 3 ---- (Pointer)\n";
+  int targetThree = 0;
+  notification("before", &targetThree);
+  setToOne(&targetThree);
+  notification("after", &targetThree);
 
-  std::cout << "---- 4\n";
+  std::cout << "---- 4 ---- (Return)\n";
   long long resultOne = 0;
-  notification("after", resultOne, &resultOne);
-  resultOne = product(1, 0, &resultOne);
-  notification("before", resultOne, &resultOne);
+  notification("before", &resultOne);
+  resultOne = product(10, 2);
+  notification("after", &resultOne);
 
-  std::cout << "---- 5\n";
+  std::cout << "---- 5 ---- (Pointer)\n";
   long long resultTwo = 0;
-  int a, b;
-  a = 1;
-  b = 0;
-  notification("after", a, &a);
-  notification("after", b, &b);
-  notification("after", resultTwo, &resultTwo);
-  productNude(a, b, &resultTwo);
-  notification("before", a, &a);
-  notification("before", b, &b);
-  notification("before", resultTwo, &resultTwo);
+  int a = 10;
+  int b = 30;
+  notification("before 'a'", &a);
+  notification("before 'b'", &b);
+  notification("before 'resultTwo'", &resultTwo);
+  productPtr(a, b, &resultTwo);
+  notification("after 'a'", &a);
+  notification("after 'b'", &b);
+  notification("after 'resultTwo'", &resultTwo);
 
-  std::cout << "---- 6\n";
+  std::cout << "---- 6 ---- (Link)\n";
   long long resultThree = 0;
-  int c, d;
-  c = 1;
-  d = 0;
-  notification("after", c, &c);
-  notification("after", d, &d);
-  notification("after", resultThree, &resultThree);
-  productNudeRef(c, d, resultThree);
-  notification("before", c, &c);
-  notification("before", d, &d);
-  notification("before", resultThree, &resultThree);
+  int c = 20;
+  int d = 40;
+  notification("before 'c'", &c);
+  notification("before 'd'", &d);
+  notification("before 'resultThree'", &resultThree);
+  productRef(c, d, resultThree);
+  notification("after 'c'", &c);
+  notification("after 'd'", &d);
+  notification("after 'resultThree'", &resultThree);
 
   return 0;
 }
 
-void notification(std::string str, int num, int *nump) {
-  std::cout << str << " value: " << num << " address: " << nump << std::endl;
+void notification(std::string str, int *num) {
+  std::cout << str << " value: " << *num << " address: " << num << std::endl;
 }
 
-void notification(std::string str, long long num, long long *nump) {
-  std::cout << str << " value: " << num << " address: " << nump << std::endl;
-}
-
-void notification(std::string str, long long num, long long &numr) {
-  std::cout << str << " value: " << num << " address: " << numr << std::endl;
+void notification(std::string str, long long *num) {
+  std::cout << str << " value: " << *num << " address: " << num << std::endl;
 }
 
 void setToOne(int num) {
   num = 1;
-  notification("inner", num, &num);
+  notification("inner", &num);
 }
 
 void setToOneRef(int &num) {
   num = 1;
-  notification("ref", num, &num);
+  notification("inner", &num);
 }
 
 void setToOne(int *num) {
   *num = 1;
-  notification("inner", *num, num);
+  notification("inner", num);
 }
 
-long long product(int a, int b, long long *p) {
-  return a + b;
-  notification("inner", *p, p);
+long long product(int a, int b) {
+  long long c = a + b;
+  return c;
 }
 
-void productNude(int a, int b, long long *p) {
-  notification("inner", *p, p);
+void productPtr(int a, int b, long long *p) {
+  notification("inner", p);
   *p = a * b;
 }
 
-void productNudeRef(int a, int b, long long &r) {
-  notification("inner Ref", r, r);
+void productRef(int a, int b, long long &r) {
+  notification("inner", &r);
   r = a * b;
 }

@@ -1,0 +1,31 @@
+Write a function set_to_1(int x) (three variants), which returns void and tries 
+to set the value of the int passed to it to one. You need to display:
+
+The value of the original variable in main and its address before the function is called;
+The value of the variable x inside the set_to_1 function and its address
+The value of the original variable in main and its address after the set_to_1 call.
+You also need to make this function, but one that accepts a reference, and then 
+one that accepts a pointer.
+
+In the second part, you need to write three more functions that:
+
+Return the result of multiplying two numbers passed to the function as arguments, 
+in the third argument. The function itself returns void. The two functions differ 
+in that in one the argument result is passed by pointer, 
+and in the other by reference.
+Print the address and value of the variable result before, during, and after the 
+multiplication call (identical to the previous part).
+The third function should take two arguments by value, and return the result of 
+the multiplication using return in the return value. Print the result of the 
+return of this function on the screen.
+In total, 6 functions that you should write and print the results for them:
+
+The set_to_1 function (for reference it will be set_to_1_r, because the compiler 
+does not distinguish between call by value and call by reference, these two functions 
+cannot have the same name) that takes the original variable by value, one function by 
+reference, and one by pointer, which try to set the value in the argument to 1; 
+That is, 3 functions in total.
+The product function, which tries to multiply two ints and return the result in 
+the third argument. There are two of these functions: by reference and by pointer.
+The product function, which takes only two arguments, and returns the result of 
+multiplying these arguments in the return value using return.

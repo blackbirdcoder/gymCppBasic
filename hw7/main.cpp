@@ -23,7 +23,7 @@ int main(void) {
 }
 
 uint64_t *fibArray(uint8_t n) {
-  if (n < MIN || n >= MAX) {
+  if (n < MIN || n > MAX) {
     return nullptr;
   }
 
@@ -35,10 +35,8 @@ uint64_t *fibArray(uint8_t n) {
     return boxPtr;
   }
 
-  uint8_t cnr = 2;
   for (uint8_t i = 1; i < n - 1; ++i) {
-    boxPtr[cnr] = boxPtr[i] + boxPtr[i - 1];
-    ++cnr;
+    boxPtr[i + 1] = boxPtr[i] + boxPtr[i - 1];
   }
 
   return boxPtr;

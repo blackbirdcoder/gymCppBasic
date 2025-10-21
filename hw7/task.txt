@@ -1,0 +1,27 @@
+Task: write a function that will accept the number of Fibonacci numbers 
+as an argument and return a dynamically allocated array of calculated 
+Fibonacci numbers. In main, call this function and display the entire sequence of 
+Fibonacci numbers on the screen (you can through a space, but you shouldn't 
+through a newline). Function signature/header:
+
+uint64_t* fib_array(int count);
+Strictly limit the number of Fibonacci numbers that the function will calculate using constants (you can use #define like I did with KB/MB/GB in class). If count passed to the function is less than 2 or greater than 80, the function should return nullptr and process this option in main (if the function returned nullptr, return an error message and exit the program BEFORE printing the Fibonacci numbers).
+
+Reminder: Fibonacci numbers are a simple sequence of numbers where 
+the zeroth element is 0, the first is 1, and all the others, starting from 
+the second, are equal to the sum of the two previous 
+ones (fibs[n - 1] + fibs[n - 2]).
+
+In the main, simply print
+
+[0 1 1 2 3 5 8 13 ...] // and so on to the count that was requested in 
+the argument fib_array() when calling
+
+But, once again, do not forget that you need to limit the possible n from 2 to 80.
+
+At the end of the main, do not forget to correctly delete the dynamically 
+allocated memory, because I will deduct points for this.
+
+ATTENTION: you will have to use unsigned 64-bit ints, 
+because your 80th fib will not fit in a regular int. Therefore, 
+use uint64_t from the cstdint header.

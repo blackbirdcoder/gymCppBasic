@@ -1,0 +1,24 @@
+Working with two-dimensional arrays on the heap
+
+Allocate a two-dimensional array (dynamically, on the heap) 
+of ROWS rows and COLS columns (how many you want - 3x4, 10x12 - it doesn't matter). 
+Set ROWS and COLS as global const int constants at the beginning of the file 
+(you can use them as needed in the code). Initialize the array in main with 
+numbers from 1 to ROWS*COLS (product). That is, if the array is 3x4, 
+then the numbers will be from 1 to 12.
+
+Display two things on the screen:
+
+The array itself (formatted correctly, with the correct number of rows and columns);
+The sum of all its elements.
+IMPORTANT: Displaying the array on the screen, as well as calculating and 
+returning the sum of all elements, must be done by separate functions. 
+The function can take three arguments: the array itself, the number of rows, the number of columns. 
+The printer returns void, the calculator returns int, 
+or any integer data type convenient for you (i.e. returns the calculated sum).
+
+ATTENTION: Please do not forget that the pointer array itself, as well as each 
+pointer to the int array in it, must be deleted in reverse order before it is 
+initialized, otherwise it will be a memory leak, and points will be deducted for this.
+
+

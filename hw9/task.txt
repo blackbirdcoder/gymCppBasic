@@ -1,0 +1,67 @@
+You need to write a program that will analyze a certain text (in a text file) 
+for the frequency of words that occur in it. 
+For examples of text, you can take text from Wikipedia and other popular 
+English-language sites.
+
+Your program must accept exactly two arguments from the command line: the name 
+of the file that you will analyze, and the name of the report file to which 
+you will write the result of your analysis:
+
+freq.exe <input file> <report file>
+The report file will look like this:
+
+<word>: <how many times encountered in text>
+<word>: <how many times encountered in text>
+<word>: <how many times encountered in text>
+Example. If your file contains the following text:
+
+
+My home is in New York. I don't like living there though. 
+I believe living in Europe would suit me better, in any case.
+Then your report file should look like this:
+
+in: 3
+I: 2
+living: 2
+My: 1
+home: 1
+is: 1
+New: 1
+York: 1
+any: 1
+case: 1
+don't: 1
+like: 1
+there: 1
+though: 1
+believe: 1
+Europe: 1
+would: 1
+suit: 1
+me: 1
+better: 1
+Criteria for building a program (ATTENTION: your homework WILL NOT be accepted 
+if ALL of these criteria are not met):
+
+The program must accept EXCLUSIVELY two arguments. 
+If there are less than two arguments, more than two, or if any of the 
+arguments is not the real name of a real existing 
+file - the program must NOT run with errors, but display a 
+message about a specific error and exit the program 
+(without executing the file analysis algorithm). This is REQUIRED.
+The report should be sorted so that the 
+frequencies of the words are from the highest to the lowest. 
+That is, 3 at the top, then 2, then 1, etc. As in the example.
+There should be no punctuation marks at the end of the words. 
+That is, do not count 'word.' and 'word' as separate words. 
+Remove the comma from the end and count as 'word: 2'.
+Different case of words makes them different words: 
+"Word", "word", "WorD" are all different words.
+The program should not depend on any other text files, 
+except for the file with the text that you analyze 
+(the name of which is passed in the first argument 
+of the command line), and the report file to which 
+you write the result. There should be no other text files. 
+That is, temporary files are prohibited.
+TIP: to store words and frequencies, you should use std::map, 
+it exists for such things.

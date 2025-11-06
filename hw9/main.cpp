@@ -7,10 +7,10 @@
 #include <vector>
 
 const uint16_t NUM_ARG = 3;
-const std::string INPUT_FILE = "input.txt";
-const std::string REPORT_FILE = "report.txt";
+std::string fileInput = "";
+std::string fileReport = "";
 
-bool checkingExtArg(const int, const char **);
+bool serviceArg(const int, const char **);
 std::vector<std::string> readContent();
 std::map<std::string, uint64_t> wordParsing(std::vector<std::string>);
 bool writeReport(const std::map<std::string, uint64_t> *,
@@ -20,14 +20,14 @@ bool order(std::pair<std::string, uint64_t> &a,
            std::pair<std::string, uint64_t> &b);
 
 int main(const int argc, const char **argv) {
-  if (!checkingExtArg(argc, argv)) {
+  if (!serviceArg(argc, argv)) {
     std::cout << "[!] Error in arguments! Program exit!" << std::endl;
     return 1;
   }
 
   std::vector<std::string> constent = readContent();
   if (constent.size() == 0) {
-    std::string error = "[!] Error " + INPUT_FILE + " file is empty";
+    std::string error = "[!] Error " + fileInput + " file is empty";
     std::cout << error << std::endl;
     return 1;
   }
@@ -44,8 +44,10 @@ int main(const int argc, const char **argv) {
   return 0;
 }
 
-bool checkingExtArg(const int argc, const char **argv) {
-  if (argc == NUM_ARG && argv[1] == INPUT_FILE && argv[2] == REPORT_FILE) {
+bool serviceArg(const int argc, const char **argv) {
+  if (argc == NUM_ARG) {
+    fileInput = argv[1];
+    fileReport = argv[2];
     return true;
   }
 
@@ -55,9 +57,9 @@ bool checkingExtArg(const int argc, const char **argv) {
 std::vector<std::string> readContent() {
   std::vector<std::string> content;
   std::string currentLine = "";
-  std::ifstream file(INPUT_FILE);
+  std::ifstream file(fileInput);
 
-  while (std::getline(file, currentLine)) {
+  while (file >> currentLine) {
     content.push_back(currentLine);
   }
   file.close();
@@ -71,20 +73,13 @@ std::map<std::string, uint64_t> wordParsing(std::vector<std::string> content) {
 
   for (uint64_t i = 0; i < content.size(); ++i) {
     for (uint64_t j = 0; j < content[i].size(); ++j) {
-      if (content[i][j] == ',' || content[i][j] == '.') {
-        continue;
-      }
-
-      if (content[i][j] != ' ') {
+      if (!std::ispunct(content[i][j])) {
         word.append(1, content[i][j]);
-      } else {
-        if (!word.empty()) {
-          std::map<std::string, uint64_t>::iterator it = report.find(word);
-          it != report.end() ? it->second += 1 : report[word] += 1;
-          word.clear();
-        }
       }
     }
+    std::map<std::string, uint64_t>::iterator it = report.find(word);
+    it != report.end() ? it->second += 1 : report[word] += 1;
+    word.clear();
   }
 
   return report;
@@ -102,7 +97,7 @@ bool writeReport(const std::map<std::string, uint64_t> *ptr,
 
   std::sort(box.begin(), box.end(), cbForSort);
 
-  std::ofstream file(REPORT_FILE);
+  std::ofstream file(fileReport);
   if (file.is_open()) {
     for (const std::pair<std::string, uint64_t> kv : box) {
       file << kv.first << ": " << kv.second << "\n";

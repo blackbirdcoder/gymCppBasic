@@ -1,2 +1,3 @@
-My home is in New York. I don't like living there though. I believe living in Europe would suit me better, in any case.
-
+My home is in New York. I don't like living there though. 
+I believe living in 
+Europe would suit me better, in any case.

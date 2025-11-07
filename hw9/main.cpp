@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <regex>
 #include <string>
 #include <vector>
 
@@ -70,16 +71,18 @@ std::vector<std::string> readContent() {
 std::map<std::string, uint64_t> wordParsing(std::vector<std::string> content) {
   std::map<std::string, uint64_t> report;
   std::string word;
+  // not scrupulous search pattern "([A-Za-z'-]+)";
+  // scrupulous search pattern "([A-Za-z]+([-'][A-Za-z]+)*)"
+  std::regex pattern("([A-Za-z]+([-'][A-Za-z]+)*)");
+  std::smatch match;
 
   for (uint64_t i = 0; i < content.size(); ++i) {
-    for (uint64_t j = 0; j < content[i].size(); ++j) {
-      if (!std::ispunct(content[i][j])) {
-        word.append(1, content[i][j]);
-      }
+    if (std::regex_search(content[i], match, pattern)) {
+      word.append(match[0]);
+      std::map<std::string, uint64_t>::iterator it = report.find(word);
+      it != report.end() ? it->second += 1 : report[word] += 1;
+      word.clear();
     }
-    std::map<std::string, uint64_t>::iterator it = report.find(word);
-    it != report.end() ? it->second += 1 : report[word] += 1;
-    word.clear();
   }
 
   return report;

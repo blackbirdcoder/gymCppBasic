@@ -10,7 +10,7 @@ me: 1
 like: 1
 is: 1
 home: 1
-dont: 1
+don't: 1
 case: 1
 better: 1
 believe: 1

@@ -71,9 +71,7 @@ std::vector<std::string> readContent() {
 std::map<std::string, uint64_t> wordParsing(std::vector<std::string> content) {
   std::map<std::string, uint64_t> report;
   std::string word;
-  // not scrupulous search pattern "([A-Za-z'-]+)";
-  // scrupulous search pattern "([A-Za-z]+([-'][A-Za-z]+)*)"
-  std::regex pattern("([A-Za-z]+([-'][A-Za-z]+)*)");
+  std::regex pattern("([A-Za-z]+([[:punct:]][A-Za-z]+)*)");
   std::smatch match;
 
   for (uint64_t i = 0; i < content.size(); ++i) {
